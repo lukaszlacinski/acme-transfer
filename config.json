@@ -1,0 +1,22 @@
+{
+    "globus": {
+        "username": "globus_username",
+        "password": "globus_password"
+    },
+    "endpoint": {
+        "nersc#edison": "b9d02196-6d04-11e5-ba46-22000b92c6ec",
+        "climate#data": "b4155e9b-6d04-11e5-ba46-22000b92c6ec"
+    },
+    "credential": {
+        "b9d02196-6d04-11e5-ba46-22000b92c6ec": {
+            "comment": "nersc#edison",
+            "username": "username",
+            "password": "password"
+        },
+        "b4155e9b-6d04-11e5-ba46-22000b92c6ec": {
+            "comment": "climate#data",
+            "username": "username",
+            "password": "password",
+        }
+    }
+}
