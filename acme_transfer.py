@@ -96,12 +96,12 @@ def transfer(options):
     while True:
         code, reason, data = api_client.task(task_id)
         if data['status'] == 'SUCCEEDED':
-            print 'progress %d/%d' % (data['subtasks_succeeded'], data['subtasks_total'])
+            print 'progress %d/%d' % (data['files_transferred'], data['files'])
             return ('success', '')
         elif data['status'] == 'FAILED':
             return ('error', data['nice_status_details'])
         elif data['status'] == 'ACTIVE':
-            print 'progress %d/%d' % (data['subtasks_succeeded'], data['subtasks_total'])
+            print 'progress %d/%d' % (data['files_transferred'], data['files'])
         time.sleep(10)
 
 
