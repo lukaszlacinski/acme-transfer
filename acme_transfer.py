@@ -90,15 +90,19 @@ def transfer(options):
         print 'task_id %s' % task_id
     except Exception as e:
         msg = "Could not submit the transfer. Error: %s" % str(e)
+        sys.exit(1)
 
     # Check a status of the transfer every minute (60 secs)
     while True:
         code, reason, data = api_client.task(task_id)
         if data['status'] == 'SUCCEEDED':
+            print 'progress %d/%d' % (data['subtasks_succeeded'], data['subtasks_total'])
             return ('success', '')
         elif data['status'] == 'FAILED':
             return ('error', data['nice_status_details'])
-        time.sleep(60)
+        elif data['status'] == 'ACTIVE':
+            print 'progress %d/%d' % (data['subtasks_succeeded'], data['subtasks_total'])
+        time.sleep(10)
 
 
 if __name__ == '__main__':
@@ -120,5 +124,9 @@ if __name__ == '__main__':
     cfg_file = open(options.config, 'r')
     config = json.load(cfg_file)
 
-    transfer(options)
+    status, msg = transfer(options)
+    if status == 'success':
+        sys.exit(0)
+    print '%s %s' % (status, msg)
+    sys.exit(1)
 
