@@ -17,8 +17,8 @@
             "comment": "climate#data",
             "username": "username",
             "password": "password",
-        }
-        "a49fff56-96b9-11e6-b0ab-22000b92c261" {
+        },
+        "a49fff56-96b9-11e6-b0ab-22000b92c261": {
             "comment": "Shared endpoint on pcmdi11.llnl.gov:2812",
             "username": "n/a",
             "password": "n/a"
