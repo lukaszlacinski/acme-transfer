@@ -101,12 +101,14 @@ def transfer(options):
             time.sleep(60)
             continue
         if data['status'] == 'SUCCEEDED':
-            print 'progress %d/%d' % (data['files_transferred'], data['files'])
+            if options.progress:
+                print 'progress %d/%d' % (data['files_transferred'], data['files'])
             return ('success', '')
         elif data['status'] == 'FAILED':
             return ('error', data['nice_status_details'])
         elif data['status'] == 'ACTIVE':
-            print 'progress %d/%d' % (data['files_transferred'], data['files'])
+            if options.progress:
+                print 'progress %d/%d' % (data['files_transferred'], data['files'])
         time.sleep(60)
 
 
@@ -119,7 +121,7 @@ if __name__ == '__main__':
     parser.add_option('--destination-endpoint', dest='dstendpoint', help='Destination endpoint.')
     parser.add_option('--destination-path', dest='dstpath', help='Destination path')
     parser.add_option('-r', '--recursive', dest='recursive', action='store_true', default=False, help='Indicates that \'source\' is a directory')
-    parser.add_option('--progress', dest='progress', default=False, help='Display progress status every minute')
+    parser.add_option('-p', '--progress', dest='progress', action='store_true', default=False, help='Display progress status every minute')
     parser.add_option('-c', '--config', dest='config', default='config.json', help='Path to a configuration file with credentials and legacy endpoint names to UUID mappings. By default, config.json is used')
 
     (options, args) = parser.parse_args()
